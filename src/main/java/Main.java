@@ -147,34 +147,34 @@ public class Main extends ListenerAdapter {
       System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
       switch (i) {
         case 1:
-          leader.appendDescription("\uD83D\uDC51 -> " + user.getAsMention() + " : " + points + "\n");
+          leader.appendDescription("\uD83D\uDC51 -> " + user.getAsTag() + " : " + points + "\n");
           break;
         case 2:
-          leader.appendDescription("\uD83E\uDD48 -> " + user.getAsMention() + " : " + points + "\n");
+          leader.appendDescription("\uD83E\uDD48 -> " + user.getAsTag() + " : " + points + "\n");
           break;
         case 3:
-          leader.appendDescription("\uD83E\uDD49 -> " + user.getAsMention() + " : " + points + "\n");
+          leader.appendDescription("\uD83E\uDD49 -> " + user.getAsTag() + " : " + points + "\n");
           break;
         case 4:
-          leader.appendDescription("\u0034\uFE0F\u20E3 -> " + user.getAsMention() + " : " + points + "\n");
+          leader.appendDescription("\u0034\uFE0F\u20E3 -> " + user.getAsTag() + " : " + points + "\n");
           break;
         case 5:
-          leader.appendDescription("\u0035\uFE0F\u20E3 -> " + user.getAsMention() + " : " + points + "\n");
+          leader.appendDescription("\u0035\uFE0F\u20E3 -> " + user.getAsTag() + " : " + points + "\n");
           break;
         case 6:
-          leader.appendDescription("\u0036\uFE0F\u20E3 -> " + user.getAsMention() + " : " + points + "\n");
+          leader.appendDescription("\u0036\uFE0F\u20E3 -> " + user.getAsTag() + " : " + points + "\n");
           break;
         case 7:
-          leader.appendDescription("\u0037\uFE0F\u20E3 -> " + user.getAsMention() + " : " + points + "\n");
+          leader.appendDescription("\u0037\uFE0F\u20E3 -> " + user.getAsTag() + " : " + points + "\n");
           break;
         case 8:
-          leader.appendDescription("\u0038\uFE0F\u20E3 -> " + user.getAsMention() + " : " + points + "\n");
+          leader.appendDescription("\u0038\uFE0F\u20E3 -> " + user.getAsTag() + " : " + points + "\n");
           break;
         case 9:
-          leader.appendDescription("\u0039\uFE0F\u20E3 -> " + user.getAsMention() + " : " + points + "\n");
+          leader.appendDescription("\u0039\uFE0F\u20E3 -> " + user.getAsTag() + " : " + points + "\n");
           break;
         case 10:
-          leader.appendDescription("\uD83D\uDD1F -> " + user.getAsMention() + " : " + points + "\n");
+          leader.appendDescription("\uD83D\uDD1F -> " + user.getAsTag() + " : " + points + "\n");
           break;
       }
       i++;
