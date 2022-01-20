@@ -64,7 +64,6 @@ class rps extends ListenerAdapter {
           event.editMessage("Janaka: 🪨\n" + user.getName() + ": 🪨\nTie").queue(InteractionHook -> {
             InteractionHook.editOriginalComponents().setActionRows().queue();
           });
-          Main.addPoint(user, 1);
         }
       }
       if (event.getComponentId().equals("paper")) {
@@ -83,7 +82,6 @@ class rps extends ListenerAdapter {
           event.editMessage("Janaka: 📰\n" + user.getName() + ": 📰\nTie").queue(InteractionHook -> {
             InteractionHook.editOriginalComponents().setActionRows().queue();
           });
-          Main.addPoint(user, 1);
         }
 
       }
