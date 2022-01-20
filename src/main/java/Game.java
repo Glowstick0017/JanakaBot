@@ -14,6 +14,10 @@ public class Game extends ListenerAdapter {
     this.user = user;
   }
 
+  /**
+   * receives and replies to button click events
+   * @param event button click event
+   */
   @Override
   public void onButtonClick(@Nonnull ButtonClickEvent event) {
     super.onButtonClick(event);
@@ -41,6 +45,10 @@ class rps extends ListenerAdapter {
     this.user = user;
   }
 
+  /**
+   * receives and replies to button click events
+   * @param event button click event
+   */
   @Override
   public void onButtonClick(@Nonnull ButtonClickEvent event) {
     super.onButtonClick(event);

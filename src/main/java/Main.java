@@ -57,6 +57,10 @@ public class Main extends ListenerAdapter {
     }
   }
 
+  /**
+   * Receives and replies to messages
+   * @param event message received event
+   */
   @Override
   public void onMessageReceived(@Nonnull MessageReceivedEvent event) {
     super.onMessageReceived(event);
@@ -76,7 +80,10 @@ public class Main extends ListenerAdapter {
           unsortedMap.put(event.getAuthor(), 0);
         }
       }
-      event.getMessage().reply("Do you want to play a game?").setActionRow(Button.primary("accept", "\u2705"),Button.secondary("deny", "❌")).queue();
+      event.getMessage().reply("Do you want to play a game?").setActionRow(
+              Button.primary("accept", "\u2705"),
+              Button.secondary("deny", "❌")
+      ).queue();
       event.getJDA().addEventListener(new Game(event.getAuthor()));
     }
 
@@ -90,6 +97,11 @@ public class Main extends ListenerAdapter {
     }
   }
 
+  /**
+   *
+   * @param userID discord User object receiving points
+   * @param points integer number of points to be added to user
+   */
   public static void addPoint(User userID, int points) {
     unsortedMap.put(userID, unsortedMap.get(userID) + points);
     try {
@@ -101,6 +113,11 @@ public class Main extends ListenerAdapter {
     }
   }
 
+  /**
+   * Sorts the map by leading points
+   * @param unsortMap map of all users and associated points
+   * @return
+   */
   private static Map<User, Integer> sortByValue(Map<User, Integer> unsortMap) {
     List<Map.Entry<User, Integer>> list = new LinkedList<Map.Entry<User, Integer>>(unsortMap.entrySet());
 
@@ -118,6 +135,10 @@ public class Main extends ListenerAdapter {
     return sortedMap;
   }
 
+  /**
+   * prints the sorted map as a discord embed message
+   * @param map sorted map
+   */
   public static <K, V> void printMap(Map<K, V> map) {
     int i = 1;
     for (Map.Entry<K, V> entry : map.entrySet()) {
