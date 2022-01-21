@@ -25,7 +25,7 @@ public class Main extends ListenerAdapter {
   private static EmbedBuilder leader;
 
   public static void main(String[] args) throws LoginException, IOException {
-    String token = "OTEwNzI3MTQ0MTg1OTM3OTgw.YZXCvw.reEMgHggsW1gpSnmXdzLiLSYRI0";
+    String token = "TOKEN";
     JDABuilder builder = JDABuilder.createDefault(token);
     builder.setActivity(Activity.watching("college students suffer with Visual Studio"));
     builder.addEventListeners(new Main());
