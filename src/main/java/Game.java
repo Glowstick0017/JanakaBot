@@ -14,105 +14,35 @@ public class Game extends ListenerAdapter {
     this.user = user;
   }
 
-  /**
-   * receives and replies to button click events
-   * @param event button click event
-   */
   @Override
   public void onButtonClick(@Nonnull ButtonClickEvent event) {
     super.onButtonClick(event);
-    if (event.getComponentId().equals("accept") && event.getUser().equals(user)) {
-      event.editMessage("Rock, paper, scissors?").queue(InteractionHook -> {
-        InteractionHook.editOriginalComponents().setActionRow(Button.primary("rock", "🪨"),
-            Button.success("paper", "📰"), Button.secondary("scissors", "✂️")).queue();
-      });
+    if (event.getComponentId().equals("rps") && event.getUser().equals(user)) {
+      event.editMessage("Rock, paper, scissors?").setActionRow(
+              Button.primary("rock", "🪨"),
+              Button.success("paper", "📰"),
+              Button.secondary("scissors", "✂️")
+      ).queue();
       event.getJDA().addEventListener(new rps(user));
       event.getJDA().removeEventListener(this);
     }
-    if (event.getComponentId().equals("deny") && event.getUser().equals(user)) {
-      event.editMessage("Alright, no game").queue(InteractionHook -> {
-        InteractionHook.editOriginalComponents().setActionRows().queue();
+    if (event.getComponentId().equals("bj") && event.getUser().equals(user)) {
+      event.editMessage("Enter Bet Amount").queue(InteractionHook -> {
+        InteractionHook.editOriginalComponents().setActionRow(
+                Button.primary("five", "💵5💵"),
+                Button.primary("ten", "💶10💶"),
+                Button.primary("twentyfive", "💷25💷"),
+                Button.primary("fifty", "💴50💴"),
+                Button.secondary("deny", "❌")
+        ).queue();
       });
+      event.getJDA().addEventListener(new blackjack(user));
+      event.getJDA().removeEventListener(this);
+    }
+    if (event.getComponentId().equals("deny") && event.getUser().equals(user)) {
+      event.editMessage("Alright, no game").setActionRows().queue();
       event.getJDA().removeEventListener(this);
     }
   }
 }
 
-class rps extends ListenerAdapter {
-  private final User user;
-
-  public rps(User user) {
-    this.user = user;
-  }
-
-  /**
-   * receives and replies to button click events
-   * @param event button click event
-   */
-  @Override
-  public void onButtonClick(@Nonnull ButtonClickEvent event) {
-    super.onButtonClick(event);
-    if (event.getUser().equals(user)) {
-      String[] choices = { "ROCK", "PAPER", "SCISSORS" };
-      String chosen = choices[(int) Math.floor(Math.random() * choices.length)];
-      String userchoise = event.getComponentId();
-      if (event.getComponentId().equals("rock")) {
-        if (chosen.equals("PAPER")) {
-          event.editMessage("Janaka: 📰\n" + user.getName() + ": 🪨\nJanaka Wins").queue(InteractionHook -> {
-            InteractionHook.editOriginalComponents().setActionRows().queue();
-          });
-        }
-        if (chosen.equals("SCISSORS")) {
-          event.editMessage("Janaka: ✂️\n" + user.getName() + ": 🪨\nYou Win").queue(InteractionHook -> {
-            InteractionHook.editOriginalComponents().setActionRows().queue();
-          });
-          Main.addPoint(user, 1);
-        }
-        if (chosen.equals("ROCK")) {
-          event.editMessage("Janaka: 🪨\n" + user.getName() + ": 🪨\nTie").queue(InteractionHook -> {
-            InteractionHook.editOriginalComponents().setActionRows().queue();
-          });
-        }
-      }
-      if (event.getComponentId().equals("paper")) {
-        if (chosen.equals("ROCK")) {
-          event.editMessage("Janaka: 🪨\n" + user.getName() + ": 📰\nYou Win").queue(InteractionHook -> {
-            InteractionHook.editOriginalComponents().setActionRows().queue();
-          });
-          Main.addPoint(user, 1);
-        }
-        if (chosen.equals("SCISSORS")) {
-          event.editMessage("Janaka: ✂️\n" + user.getName() + ": 📰\nJanaka Wins").queue(InteractionHook -> {
-            InteractionHook.editOriginalComponents().setActionRows().queue();
-          });
-        }
-        if (chosen.equals("PAPER")) {
-          event.editMessage("Janaka: 📰\n" + user.getName() + ": 📰\nTie").queue(InteractionHook -> {
-            InteractionHook.editOriginalComponents().setActionRows().queue();
-          });
-        }
-
-      }
-      if (event.getComponentId().equals("scissors")) {
-        if (chosen.equals("PAPER")) {
-          event.editMessage("Janaka: 📰\n" + user.getName() + ": ✂️\nYou Win").queue(InteractionHook -> {
-            InteractionHook.editOriginalComponents().setActionRows().queue();
-          });
-          Main.addPoint(user, 1);
-        }
-        if (chosen.equals("ROCK")) {
-          event.editMessage("Janaka: 🪨\n" + user.getName() + ": ✂️\nJanaka Wins").queue(InteractionHook -> {
-            InteractionHook.editOriginalComponents().setActionRows().queue();
-          });
-        }
-        if (chosen.equals("SCISSORS")) {
-          event.editMessage("Janaka: ✂️\n" + user.getName() + ": ✂️\nTie").queue(InteractionHook -> {
-            InteractionHook.editOriginalComponents().setActionRows().queue();
-          });
-        }
-
-      }
-        event.getJDA().removeEventListener(this);
-    }
-  }
-}

@@ -25,9 +25,9 @@ public class Main extends ListenerAdapter {
   private static EmbedBuilder leader;
 
   public static void main(String[] args) throws LoginException, IOException {
-    String token = "TOKEN HERE";
+    String token = "OTEwNzI3MTQ0MTg1OTM3OTgw.YZXCvw.reEMgHggsW1gpSnmXdzLiLSYRI0";
     JDABuilder builder = JDABuilder.createDefault(token);
-    builder.setActivity(Activity.watching("college students suffer with javaFX"));
+    builder.setActivity(Activity.watching("college students suffer with Visual Studio"));
     builder.addEventListeners(new Main());
     jda = builder.build();
 
@@ -46,8 +46,8 @@ public class Main extends ListenerAdapter {
     }
 
     Map<String, String> properties = Splitter.on(",")
-    .withKeyValueSeparator("=")
-    .split(str);
+            .withKeyValueSeparator("=")
+            .split(str);
     for (Map.Entry<String, String> entry : properties.entrySet()) {
       String id = (String) entry.getKey();
       id = id.substring(id.indexOf("(") + 1);
@@ -57,10 +57,6 @@ public class Main extends ListenerAdapter {
     }
   }
 
-  /**
-   * Receives and replies to messages
-   * @param event message received event
-   */
   @Override
   public void onMessageReceived(@Nonnull MessageReceivedEvent event) {
     super.onMessageReceived(event);
@@ -80,44 +76,41 @@ public class Main extends ListenerAdapter {
           unsortedMap.put(event.getAuthor(), 0);
         }
       }
-      event.getMessage().reply("Do you want to play a game?").setActionRow(
-              Button.primary("accept", "\u2705"),
-              Button.secondary("deny", "❌")
-      ).queue();
+      event.getMessage().reply("Which game would you like to play?").setActionRow(Button.primary("rps", "🪨📰✂️"),Button.primary("bj", "🃏"),Button.secondary("deny", "❌")).queue();
       event.getJDA().addEventListener(new Game(event.getAuthor()));
+    }
+
+    if (event.getMessage().getContentDisplay().toUpperCase(Locale.ROOT).equals("POINTS"))
+    {
+      EmbedBuilder bal = new EmbedBuilder();
+      //bal.setTitle(event.getAuthor().getName());
+      bal.setAuthor(event.getAuthor().getName(), event.getAuthor().getAvatarUrl(), event.getAuthor().getAvatarUrl());
+      //bal.setThumbnail(event.getAuthor().getAvatarUrl());
+      bal.setDescription("Points : " + unsortedMap.get(event.getAuthor()));
+      event.getMessage().replyEmbeds(bal.build()).queue();
     }
 
     if (event.getMessage().getContentDisplay().toUpperCase(Locale.ROOT).equals("LEADERBOARD")) {
       Map<User, Integer> sortedMap = sortByValue(unsortedMap);
       leader = new EmbedBuilder();
-      leader.setColor(Color.CYAN);
+      leader.setColor(Color.getColor("#9d9287"));
       leader.setTitle("Leaderboard");
       printMap(sortedMap);
       event.getChannel().sendMessageEmbeds(leader.build()).queue();
     }
   }
 
-  /**
-   *
-   * @param userID discord User object receiving points
-   * @param points integer number of points to be added to user
-   */
   public static void addPoint(User userID, int points) {
     unsortedMap.put(userID, unsortedMap.get(userID) + points);
     try {
-    FileWriter myWriter = new FileWriter("database.txt");
-    myWriter.write(unsortedMap.toString());
-    myWriter.close();
+      FileWriter myWriter = new FileWriter("database.txt");
+      myWriter.write(unsortedMap.toString());
+      myWriter.close();
     } catch (Exception e) {
-      
+
     }
   }
 
-  /**
-   * Sorts the map by leading points
-   * @param unsortMap map of all users and associated points
-   * @return
-   */
   private static Map<User, Integer> sortByValue(Map<User, Integer> unsortMap) {
     List<Map.Entry<User, Integer>> list = new LinkedList<Map.Entry<User, Integer>>(unsortMap.entrySet());
 
@@ -144,40 +137,45 @@ public class Main extends ListenerAdapter {
     for (Map.Entry<K, V> entry : map.entrySet()) {
       User user = (User) entry.getKey();
       int points = (int) entry.getValue();
-      System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
+      //System.out.println("Key : " + entry.getKey() + " Value : " + entry.getValue());
       switch (i) {
         case 1:
-          leader.appendDescription("\uD83D\uDC51 -> " + user.getAsTag() + " : " + points + "\n");
+          leader.appendDescription("\uD83D\uDC51 -> `" + user.getName() + "` : " + points + "\n");
           break;
         case 2:
-          leader.appendDescription("\uD83E\uDD48 -> " + user.getAsTag() + " : " + points + "\n");
+          leader.appendDescription("\uD83E\uDD48 -> `" + user.getName() + "` : " + points + "\n");
           break;
         case 3:
-          leader.appendDescription("\uD83E\uDD49 -> " + user.getAsTag() + " : " + points + "\n");
+          leader.appendDescription("\uD83E\uDD49 -> `" + user.getName() + "` : " + points + "\n");
           break;
         case 4:
-          leader.appendDescription("\u0034\uFE0F\u20E3 -> " + user.getAsTag() + " : " + points + "\n");
+          leader.appendDescription("\u0034\uFE0F\u20E3 -> `" + user.getName() + "` : " + points + "\n");
           break;
         case 5:
-          leader.appendDescription("\u0035\uFE0F\u20E3 -> " + user.getAsTag() + " : " + points + "\n");
+          leader.appendDescription("\u0035\uFE0F\u20E3 -> `" + user.getName() + "` : " + points + "\n");
           break;
         case 6:
-          leader.appendDescription("\u0036\uFE0F\u20E3 -> " + user.getAsTag() + " : " + points + "\n");
+          leader.appendDescription("\u0036\uFE0F\u20E3 -> `" + user.getName() + "` : " + points + "\n");
           break;
         case 7:
-          leader.appendDescription("\u0037\uFE0F\u20E3 -> " + user.getAsTag() + " : " + points + "\n");
+          leader.appendDescription("\u0037\uFE0F\u20E3 -> `" + user.getName() + "` : " + points + "\n");
           break;
         case 8:
-          leader.appendDescription("\u0038\uFE0F\u20E3 -> " + user.getAsTag() + " : " + points + "\n");
+          leader.appendDescription("\u0038\uFE0F\u20E3 -> `" + user.getName() + "` : " + points + "\n");
           break;
         case 9:
-          leader.appendDescription("\u0039\uFE0F\u20E3 -> " + user.getAsTag() + " : " + points + "\n");
+          leader.appendDescription("\u0039\uFE0F\u20E3 -> `" + user.getName() + "` : " + points + "\n");
           break;
         case 10:
-          leader.appendDescription("\uD83D\uDD1F -> " + user.getAsTag() + " : " + points + "\n");
+          leader.setTitle("Leaderboard top 10");
+          leader.appendDescription("\uD83D\uDD1F -> `" + user.getName() + "` : " + points + "\n");
           break;
       }
       i++;
     }
+  }
+
+  public static Map<User, Integer> getUnsortedMap() {
+    return unsortedMap;
   }
 }
